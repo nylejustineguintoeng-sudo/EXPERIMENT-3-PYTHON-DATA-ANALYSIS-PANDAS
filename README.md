@@ -7,15 +7,15 @@
 
 ## Short Description
 
-A collection of data analysis and manipulation solutions in Python using **Pandas**, featuring positional and label-based DataFrame slicing (`.iloc`, column labels), specific model record lookup via custom Boolean conditions, and non-destructive multi-model subsetting with shape verification.
+A Pandas lab assignment demonstrating DataFrame slicing using `.iloc`, row filtering with Boolean conditions, and subset extraction without altering the original dataset.
 
 ---
 
 ## Project Overview
 
-This repository contains the completed Jupyter Notebook for **Experiment 3** of the course **ECE 2112: Advanced Computer Programming and Algorithms**.
+This repository contains the completed Jupyter Notebook for **Experiment 3** of **ECE 2112: Advanced Computer Programming and Algorithms**. 
 
-The primary objective of this laboratory is to load a CSV dataset into a Pandas DataFrame, perform positional and label-based indexing, filter records using conditional statements, and extract specified subsets without mutating the underlying source dataset (`cars.csv`).
+The main goal is to load `cars.csv` into Pandas, extract specific rows and columns using positional and label-based indexing, filter records by model names, and verify the resulting DataFrame shapes.
 
 ---
 
@@ -23,25 +23,25 @@ The primary objective of this laboratory is to load a CSV dataset into a Pandas 
 
 ### Problem A: Positional and Label-Based Slicing
 
-* **Objective:** Load the `cars.csv` dataset into a DataFrame named `cars`, inspect its dimensions and column names, and slice specific row/column subsets.
-* **Implementation:** Uses `cars.shape` and `cars.columns` to inspect metadata. Performs positional slicing with `.iloc[5:10]` to extract rows 6 through 10 into `cars_6_to_10`, then selects only `'Model'`, `'mpg'`, `'cyl'`, `'hp'`, and `'gear'` using label-based indexing.
-* **Verification:** Displays dataset shape `(32, 12)`, column lists, intermediate positional row slices, and the final 5-column subset directly in executed notebook cells.
+* **Objective:** Inspect dataset dimensions, view column names, and slice rows 6 through 10.
+* **Implementation:** Uses `cars.shape` and `cars.columns` for inspect design. Uses `.iloc[5:10]` to extract rows 6 to 10 into `cars_6_to_10`, then selects only `'Model'`, `'mpg'`, `'cyl'`, `'hp'`, and `'gear'` using column labels.
+* **Verification:** Displays the total dataset shape `(32, 12)`, column names, and the sliced outputs using standard print statements.
 
 ---
 
 ### Problem B: Model Lookup
 
-* **Objective:** Retrieve specific vehicle records dynamically from the `Model` column using Boolean indexing without hard-coding row index numbers.
-* **Implementation:** Applies the equality operator `cars['Model'] == 'Toyota Corolla'` to store the complete record in `toyota`. Similarly, masks `'Pontiac Firebird'` to extract a subset containing only `'Model'`, `'mpg'`, `'hp'`, and `'wt'`, storing it in `pontiac`.
-* **Verification:** Validates that both subsets return the precise matching records without using hard-coded integer indices.
+* **Objective:** Find specific car models dynamically using Boolean conditions instead of hard-coded row numbers.
+* **Implementation:** Filters `cars['Model'] == 'Toyota Corolla'` for all columns, and `cars['Model'] == 'Pontiac Firebird'` for only `'Model'`, `'mpg'`, `'hp'`, and `'wt'`.
+* **Verification:** Displays both filtered records, saving them into `toyota` and `pontiac`.
 
 ---
 
 ### Problem C: Multi-Model Subsetting
 
-* **Objective:** Extract records for three specific models (`Datsun 710`, `Lotus Europa`, and `Ferrari Dino`) while retaining only the columns `Model`, `mpg`, `cyl`, `hp`, and `gear`.
-* **Implementation:** Uses `.isin(['Datsun 710', 'Lotus Europa', 'Ferrari Dino'])` on the `Model` column to filter rows by value and stores the result in a new DataFrame named `selected_cars`.
-* **Verification:** Confirms that `selected_cars.shape` strictly evaluates to `(3, 5)` (exactly 3 rows and 5 columns) while preserving the original dataset row order.
+* **Objective:** Extract records for three target models (`Datsun 710`, `Lotus Europa`, `Ferrari Dino`) and keep only specified columns.
+* **Implementation:** Uses `.isin()` on the `Model` column to pick the three rows and selects the `'Model'`, `'mpg'`, `'cyl'`, `'hp'`, and `'gear'` columns to create `selected_cars`.
+* **Verification:** Displays the DataFrame and checks that `selected_cars.shape` equals `(3, 5)`.
 
 ---
 
