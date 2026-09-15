@@ -78,8 +78,33 @@ target_models = ['Datsun 710', 'Lotus Europa', 'Ferrari Dino']
 
 # Extracting rows that match the target models, and keeping specific columns
 selected_cars = cars[cars['Model'].isin(target_models)][['Model', 'mpg', 'cyl', 'hp', 'gear']]
+```
 
-# Project File Structure
+---
+
+## 📂 Project File Structure
+
+```text
 ├── GUINTO_ECE2112_PA3.ipynb   # Main Jupyter Notebook containing all executed cells and logic
 ├── README.md                  # Project documentation (this file)
 └── cars.csv                   # Source dataset containing vehicle variables
+```
+
+---
+
+## 🛠️ Prerequisites & Requirements
+
+To run the notebook successfully, ensure the following are installed:
+* **Python 3.x**
+* **Jupyter Notebook** or an IDE that supports `.ipynb` files (like VS Code)
+* **Pandas Library** (Can be installed via `pip install pandas`)
+
+---
+
+## 🚀 How to Run
+
+### Using Jupyter Notebook / VS Code
+1. Clone the repository `https://github.com/nylejustineguintoeng-sudo/EXPERIMENT-3-PYTHON-DATA-ANALYSIS-PANDAS.git` to your local machine.
+2. Ensure that `cars.csv` and `GUINTO_ECE2112_PA3.ipynb` are located in the same directory.
+3. Open `GUINTO_ECE2112_PA3.ipynb` in your preferred Jupyter environment.
+4. Select **Run All** (or execute each cell sequentially using `Shift + Enter`) to load the DataFrame and generate the requested subsets.
