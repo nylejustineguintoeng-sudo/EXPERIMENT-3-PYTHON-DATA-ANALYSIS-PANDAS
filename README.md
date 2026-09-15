@@ -10,9 +10,6 @@
 - [Project Overview](#-project-overview)
 - [DataFrame Operations Summary](#-dataframe-operations-summary)
 - [Problem Specifications & Solutions](#-problem-specifications--solutions)
-  - [A. Positional and Label-Based Slicing](#a-positional-and-label-based-slicing)
-  - [B. Model Lookup](#b-model-lookup)
-  - [C. Multi-Model Subsetting](#c-multi-model-subsetting)
 - [Project File Structure](#-project-file-structure)
 - [Prerequisites & Requirements](#-prerequisites--requirements)
 - [How to Run](#-how-to-run)
@@ -46,16 +43,43 @@ This project contains Python solutions for introductory data analysis using the 
 
 ## 📝 Problem Specifications & Solutions
 
-### A. Positional and Label-Based Slicing
-This section demonstrates how to inspect a dataset and extract a specific chunk of data using index positions and column names.
+This section covers the core tasks of the experiment, demonstrating various Pandas data extraction techniques:
 
-* **Inspection:** We first use `cars.shape` to get the dimensions (rows, columns) and `cars.columns` to view all available variables.
-* **Row Slicing (`.iloc`):** To get rows 6 through 10, we use `.iloc[5:10]`. Since Pandas uses zero-based indexing, index `5` corresponds to the 6th row, and the slice goes up to (but does not include) index `10`.
-* **Column Slicing:** We then filter the resulting DataFrame by passing a list of the specific column strings requested.
+* **A. Positional and Label-Based Slicing:** Uses `.iloc[5:10]` to extract rows 6 through 10 (since Pandas uses zero-based indexing, this corresponds to indices 5 to 9) and filters for specific columns by name.
+* **B. Model Lookup:** Uses Boolean indexing (`cars['Model'] == '...'`) to dynamically search for the **Toyota Corolla** (retaining the full row) and the **Pontiac Firebird** (filtering for specific columns).
+* **C. Multi-Model Subsetting:** Uses the highly efficient `.isin()` method to filter for multiple vehicles simultaneously (**Datsun 710**, **Lotus Europa**, and **Ferrari Dino**) and chains column selection to meet the required 3x5 dimension check.
 
 ```python
-# Extracting rows 6 to 10 (indices 5 to 9)
-cars_6_to_10 = cars.iloc[5:10]
+import pandas as pd
 
-# Keeping only the required columns
-cars_6_to_10 = cars_6_to_10[['Model', 'mpg', 'cyl', 'hp', 'gear']]
+# Load the dataset
+cars = pd.read_csv('cars.csv')
+
+# ---------------------------------------------------------
+# A. Positional and Label-Based Slicing
+# ---------------------------------------------------------
+# Extracting rows 6 to 10 (indices 5 to 9) and keeping specific columns
+cars_6_to_10 = cars.iloc[['Model', 'mpg', 'cyl', 'hp', 'gear']]
+
+# ---------------------------------------------------------
+# B. Model Lookup
+# ---------------------------------------------------------
+# Full row extraction using a Boolean mask
+toyota = cars[cars['Model'] == 'Toyota Corolla']
+
+# Row extraction combined with specific column selection
+pontiac = cars[cars['Model'] == 'Pontiac Firebird'][['Model', 'mpg', 'hp', 'wt']]
+
+# ---------------------------------------------------------
+# C. Multi-Model Subsetting
+# ---------------------------------------------------------
+# Defining the target models
+target_models = ['Datsun 710', 'Lotus Europa', 'Ferrari Dino']
+
+# Extracting rows that match the target models, and keeping specific columns
+selected_cars = cars[cars['Model'].isin(target_models)][['Model', 'mpg', 'cyl', 'hp', 'gear']]
+
+# Project File Structure
+├── GUINTO_ECE2112_PA3.ipynb   # Main Jupyter Notebook containing all executed cells and logic
+├── README.md                  # Project documentation (this file)
+└── cars.csv                   # Source dataset containing vehicle variables
